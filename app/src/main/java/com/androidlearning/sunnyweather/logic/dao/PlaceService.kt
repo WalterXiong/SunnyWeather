@@ -1,13 +1,13 @@
 package com.androidlearning.sunnyweather.logic.dao
 
 import com.androidlearning.sunnyweather.SunnyWeatherApplication
-import com.androidlearning.sunnyweather.ui.place.PlaceResponse
+import com.androidlearning.sunnyweather.logic.model.PlaceResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface PlaceService {
 
-    @GET("v2/place?token=${SunnyWeatherApplication.TOKEN}&lang=zh_CN")
-    fun searchPlace(@Query("query") query: String): Call<PlaceResponse>
+    @GET("v3/geocode/geo?key=${SunnyWeatherApplication.GEO_KEY}")
+    fun searchPlaces(@Query("address") address: String): Call<PlaceResponse>
 }
