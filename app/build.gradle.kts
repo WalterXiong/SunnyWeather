@@ -59,4 +59,7 @@ dependencies {
     implementation(libs.androidx.room.ktx)
 
     implementation (libs.androidx.lifecycle.livedata.ktx)
+
+    implementation(libs.jackson.module.kotlin)
+    implementation(libs.androidx.swiperefreshlayout)
 }

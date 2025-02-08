@@ -1,6 +1,7 @@
 package com.androidlearning.sunnyweather.logic.network
 
 import com.androidlearning.sunnyweather.logic.dao.PlaceService
+import com.androidlearning.sunnyweather.logic.dao.WeatherService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -10,12 +11,28 @@ import kotlin.coroutines.suspendCoroutine
 
 object SunnyWeatherNetwork {
 
+    // ====================================================================================
+    // 请求地理位置数据
+    // ====================================================================================
     /**
      * 泛型实化的应用
      */
     private val placeService = PlaceServiceCreator.create<PlaceService>()
 
     suspend fun searchPlace(query: String) = placeService.searchPlaces(query).await()
+
+    // ====================================================================================
+    // 请求天气数据
+    // ====================================================================================
+
+    private val weatherService = ServiceCreator.create<WeatherService>()
+
+    suspend fun getRealtimeWeather(lngAndLat: String) =
+        weatherService.getRealtimeWeather(lngAndLat).await()
+
+    suspend fun getDailyWeather(lngAndLat: String) =
+        weatherService.getDailyWeather(lngAndLat).await()
+
 
     /**
      * 使用 suspendCoroutine 简化回调写法
@@ -27,6 +44,7 @@ object SunnyWeatherNetwork {
             enqueue(object : Callback<T> {
 
                 override fun onResponse(call: Call<T?>, response: Response<T?>) {
+
                     val body = response.body()
                     if (body != null) {
                         continuation.resume(body)

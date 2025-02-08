@@ -1,5 +1,6 @@
 package com.androidlearning.sunnyweather.ui.place
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.androidlearning.sunnyweather.MainActivity
 import com.androidlearning.sunnyweather.R
+import com.androidlearning.sunnyweather.ui.weather.WeatherActivity
 
 class PlaceFragment : Fragment() {
 
@@ -34,6 +36,17 @@ class PlaceFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
+
+        if (viewModel.isPlaceSaved()) {
+            val place = viewModel.getSavedPlace()
+            val intent = Intent(context, WeatherActivity::class.java).apply {
+                putExtra("location_lngAndLat", place.location)
+                putExtra("place_name", place.address)
+            }
+            startActivity(intent)
+            activity?.finish()
+            return
+        }
 
         activity?.let {
 
