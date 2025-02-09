@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.androidlearning.sunnyweather.MainActivity
 import com.androidlearning.sunnyweather.R
 import com.androidlearning.sunnyweather.ui.weather.WeatherActivity
+import com.androidlearning.sunnyweather.utils.showToast
 
 class PlaceFragment : Fragment() {
 
@@ -37,7 +38,7 @@ class PlaceFragment : Fragment() {
     override fun onStart() {
         super.onStart()
 
-        if (viewModel.isPlaceSaved()) {
+        if (activity is MainActivity && viewModel.isPlaceSaved()) {
             val place = viewModel.getSavedPlace()
             val intent = Intent(context, WeatherActivity::class.java).apply {
                 putExtra("location_lngAndLat", place.location)
@@ -50,14 +51,12 @@ class PlaceFragment : Fragment() {
 
         activity?.let {
 
-            val mainActivity = it as MainActivity
+            val searchPlaceEdit = it.findViewById<EditText>(R.id.searchPlaceEdit)
+            val bgImageView = it.findViewById<ImageView>(R.id.bgImageView)
 
-            val searchPlaceEdit = mainActivity.findViewById<EditText>(R.id.searchPlaceEdit)
-            val bgImageView = mainActivity.findViewById<ImageView>(R.id.bgImageView)
+            val recyclerView = it.findViewById<RecyclerView>(R.id.recyclerView)
 
-            val recyclerView = mainActivity.findViewById<RecyclerView>(R.id.recyclerView)
-
-            val layoutManager = LinearLayoutManager(mainActivity)
+            val layoutManager = LinearLayoutManager(it)
 
             adapter = PlaceAdapter(this, viewModel.placeList)
 
@@ -76,7 +75,7 @@ class PlaceFragment : Fragment() {
                 }
             }
 
-            viewModel.placeLiveData.observe(mainActivity, Observer { result ->
+            viewModel.placeLiveData.observe(it, Observer { result ->
                 val places = result.getOrNull()
                 if (places != null) {
                     recyclerView.visibility = View.VISIBLE
@@ -85,7 +84,7 @@ class PlaceFragment : Fragment() {
                     viewModel.placeList.addAll(places)
                     adapter.notifyDataSetChanged()
                 } else {
-                    Toast.makeText(mainActivity, "未能查询到任何地点", Toast.LENGTH_SHORT).show()
+                    // "未能查询到任何地点".showToast()
                     result.exceptionOrNull()?.printStackTrace()
                 }
             })

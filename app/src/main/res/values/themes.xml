@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.SunnyWeather" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
@@ -12,6 +12,16 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+    </style>
+
+    <!-- res/values/themes.xml -->
+    <style name="Theme.MyApp" parent="Theme.SunnyWeather">
+        <!-- 设置状态栏透明 -->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <!-- 允许内容延伸到状态栏下方 -->
+        <item name="android:windowTranslucentStatus">true</item>
+        <!-- 可选：如果使用全面屏 -->
+        <item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>
     </style>
 
 </resources>
