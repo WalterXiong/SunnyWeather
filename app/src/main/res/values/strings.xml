@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SunnyWeather</string>
+    <string name="app_name">Sunny</string>
     <string name="fragmentPlace_searchPlaceEdit_Hint">输入地址</string>
     <string name="fragmentPlace_bgImageView_description">背景图</string>
 </resources>

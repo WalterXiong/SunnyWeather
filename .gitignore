@@ -35,3 +35,4 @@ google-services.json
 # Android Test
 /app/src/test
 /app/src/androidTest
+/app/release
