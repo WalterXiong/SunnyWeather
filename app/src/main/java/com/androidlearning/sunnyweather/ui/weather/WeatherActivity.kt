@@ -50,12 +50,22 @@ class WeatherActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
         setContentView(R.layout.activity_weather)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.drawerLayout)) { v, insets ->
+
+        WindowCompat.setDecorFitsSystemWindows(window, false);
+
+        /*ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.weatherLayout)) { view, insets ->
+            val statusBarHeight = insets.getInsets(WindowInsetsCompat.Type.statusBars()).top
+            view.setPadding(0, statusBarHeight, 0, 0)
+            insets
+        }*/
+
+        /*ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.drawerLayout)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
-        }
+        }*/
 
         swipeRefresh = findViewById<SwipeRefreshLayout>(R.id.swipeRefresh)
 
@@ -169,7 +179,6 @@ class WeatherActivity : AppCompatActivity() {
             forecastLayout.addView(view)
         }
 
-
         // 填充life_index.xml布局中的数据
         val coldRiskText = findViewById<TextView>(R.id.coldRiskText)
         val dressingText = findViewById<TextView>(R.id.dressingText)
@@ -192,13 +201,7 @@ class WeatherActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.add -> {
-                Toast.makeText(this, "新增", Toast.LENGTH_SHORT).show()
-                /*val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-                finish()*/
-            }
-
+            R.id.add -> Toast.makeText(this, "新增", Toast.LENGTH_SHORT).show()
             R.id.delete -> Toast.makeText(this, "删除", Toast.LENGTH_SHORT).show()
             R.id.settings -> Toast.makeText(this, "设置", Toast.LENGTH_SHORT).show()
         }

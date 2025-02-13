@@ -16,9 +16,14 @@
         android:theme="@style/Theme.SunnyWeather"
         tools:targetApi="31">
         <activity
+            android:name=".ui.test.ChatActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.test.TestActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.weather.WeatherActivity"
-            android:exported="false"
-            android:theme="@style/Theme.MyApp"/>
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

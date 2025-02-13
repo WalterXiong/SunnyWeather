@@ -20,6 +20,15 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        create("release") { //  可以命名为 "release"
+            storeFile = (file("/Users/xiong/walterxiong.jks")) // 替换为您的密钥库文件路径
+            storePassword = "xj522500" // 替换为您的密钥库密码
+            keyAlias = "walterxiongdev" // 替换为您的 KeyAlias
+            keyPassword = "xj522500" // 替换为您的 KeyPassword
+        }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -58,8 +67,11 @@ dependencies {
     // 可选，如果使用 Kotlin 协程则推荐添加
     implementation(libs.androidx.room.ktx)
 
-    implementation (libs.androidx.lifecycle.livedata.ktx)
+    implementation(libs.androidx.lifecycle.livedata.ktx)
 
     implementation(libs.jackson.module.kotlin)
     implementation(libs.androidx.swiperefreshlayout)
+
+    implementation(libs.glide)
+
 }
